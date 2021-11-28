@@ -1,6 +1,15 @@
 <template>
   <div class="tile">
     <h1>{{ langName }}</h1>
+    <form @submit="getTranslation">
+      <input
+        type="text"
+        name="name"
+        v-model="name"
+        placeholder="Enter your name here!"
+      />
+      <input type="submit" value="Translate" />
+    </form>
   </div>
 </template>
 
@@ -15,6 +24,13 @@ export default {
   props: {
     langName: String,
     langCode: String,
+  },
+  methods: {
+    getTranslation: function (e) {
+      e.preventDefault();
+      console.log(this.name);
+      e.target.reset();
+    },
   },
 };
 </script>
