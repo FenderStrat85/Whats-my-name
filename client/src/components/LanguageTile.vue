@@ -33,13 +33,14 @@
 </template>
 
 <script>
+import getNameTranslation from '../services/apiService';
 export default {
   name: 'LanguageTile',
   //upon creation of the component do something.
   //good way to confirm what is being passed.
-  created() {
-    console.log(this.langName);
-  },
+  // created() {
+  //   console.log(this.langName);
+  // },
   data() {
     return {
       showFront: true,
@@ -52,6 +53,7 @@ export default {
   methods: {
     getTranslation: function (e) {
       e.preventDefault();
+      getNameTranslation(this.name, this.langCode);
       e.target.reset();
       this.showFront = false;
     },
@@ -96,7 +98,7 @@ button {
   background-color: blueviolet;
   border: 1px solid black;
   margin: 10px;
-  height: 45vh;
+  height: 55vh;
 }
 
 .form {
@@ -112,7 +114,7 @@ button {
   background-color: green;
   border: 1px solid orangered;
   margin: 10px;
-  height: 45vh;
+  height: 55vh;
 }
 
 .flip-enter-active {
