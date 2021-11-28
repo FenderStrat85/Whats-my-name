@@ -1,16 +1,35 @@
 <template>
-  <div class="tile">
-    <h1>{{ langName }}</h1>
-    <form @submit="getTranslation">
-      <input
-        type="text"
-        name="name"
-        v-model="name"
-        placeholder="Enter your name here!"
-      />
-      <input type="submit" value="Translate" />
-    </form>
-  </div>
+  <transition name="flip" mode="out-in">
+    <div v-if="showFront">
+      <div class="tile-front">
+        <h1>{{ langName }}</h1>
+        <div>
+          <img v-bind:src="require(`../assets/flags/${langName}.svg`)" />
+        </div>
+        <div class="name-entry">
+          <form @submit="getTranslation" class="form">
+            <input
+              type="text"
+              name="name"
+              v-model="name"
+              placeholder="Enter your name here!"
+            />
+            <input type="submit" value="Translate" />
+          </form>
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="tile-back">
+        <h1>{{ langName }}</h1>
+        <div>
+          <img v-bind:src="require(`../assets/photos/${langName}.jpg`)" />
+        </div>
+        <h2>Your name in {{ langName }} is ....</h2>
+        <button @click="returnToFront">Try another name!</button>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -21,6 +40,11 @@ export default {
   created() {
     console.log(this.langName);
   },
+  data() {
+    return {
+      showFront: true,
+    };
+  },
   props: {
     langName: String,
     langCode: String,
@@ -28,8 +52,11 @@ export default {
   methods: {
     getTranslation: function (e) {
       e.preventDefault();
-      console.log(this.name);
       e.target.reset();
+      this.showFront = false;
+    },
+    returnToFront: function () {
+      this.showFront = true;
     },
   },
 };
@@ -52,12 +79,56 @@ a {
   color: #42b983;
 }
 
-.tile {
+img {
+  width: 60%;
+  align-items: center;
+  border-radius: 10px;
+}
+
+button {
+  margin: 0 10px 40px 10px;
+}
+
+.tile-front {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   background-color: blueviolet;
   border: 1px solid black;
   margin: 10px;
+  height: 45vh;
+}
+
+.form {
   display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.tile-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: green;
+  border: 1px solid orangered;
+  margin: 10px;
+  height: 45vh;
+}
+
+.flip-enter-active {
+  transition: all 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  transform-origin: 50% 50%;
+}
+
+.flip-leave-active {
+  transform-origin: 50% 50%;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.flip-enter-from,
+.flip-leave-to {
+  transform-origin: 50% 50%;
+  transform: scaleY(0) translateZ(0);
+  opacity: 0;
 }
 </style>
