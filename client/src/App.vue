@@ -1,17 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="tile-container">
+    <div v-for="language in languages" :key="language">
+      <LanguageTile :langName="language.name" :langCode="language.code" />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LanguageTile from './components/LanguageTile.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    LanguageTile,
+  },
+  data() {
+    return {
+      languages: [
+        { name: 'Chinese', code: 'cn' },
+        { name: 'Japanese', code: 'jn' },
+        { name: 'Korean', code: 'ko' },
+        { name: 'Russian', code: 'ru' },
+        { name: 'Georgian', code: 'ka' },
+        { name: 'Sinhalese', code: 'si' },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
@@ -22,5 +37,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.tile-container {
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  justify-content: center;
+  background-color: aqua;
 }
 </style>
