@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/FenderStrat85/Whats-my-name/issues"
   },
-  "homepage": "https://github.com/FenderStrat85/Whats-my-name#readme"
+  "homepage": "https://github.com/FenderStrat85/Whats-my-name#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
 }

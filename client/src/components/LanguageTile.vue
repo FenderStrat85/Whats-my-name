@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       showFront: true,
-      translatedName =''
+      translatedName: '',
     };
   },
   props: {
@@ -52,11 +52,11 @@ export default {
     langCode: String,
   },
   methods: {
-    getTranslation: function (e) {
+    getTranslation: async function (e) {
       e.preventDefault();
-      const dataFromApi = getNameTranslation(this.name, this.langCode);
-      console.log(dataFromApi)
       e.target.reset();
+      const dataFromApi = await getNameTranslation(this.name, this.langCode);
+      console.log('data from api', dataFromApi);
       this.showFront = false;
     },
     returnToFront: function () {
