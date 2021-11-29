@@ -10,7 +10,6 @@
           <form @submit="getTranslation" class="form">
             <input
               type="text"
-              name="name"
               v-model="name"
               placeholder="Enter your name here!"
             />
@@ -25,7 +24,10 @@
         <div>
           <img v-bind:src="require(`../assets/photos/${langName}.jpg`)" />
         </div>
-        <h2>Your name in {{ langName }} is {{ this.translatedName }}</h2>
+        <h2>
+          {{ this.originalName }} in {{ langName }} is
+          {{ this.translatedName }}
+        </h2>
         <button @click="returnToFront">Try another name!</button>
       </div>
     </div>
@@ -44,6 +46,7 @@ export default {
   data() {
     return {
       showFront: true,
+      originalName: '',
       translatedName: '',
     };
   },
@@ -54,7 +57,8 @@ export default {
   methods: {
     getTranslation: async function (e) {
       e.preventDefault();
-      e.target.reset();
+      // e.target.reset();
+      this.originalName = this.name;
       const dataFromApi = await getNameTranslation(this.name, this.langCode);
       console.log(
         'data from api',
@@ -65,6 +69,7 @@ export default {
       this.showFront = false;
     },
     returnToFront: function () {
+      this.name = '';
       this.showFront = true;
     },
   },
