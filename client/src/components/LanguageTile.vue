@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       showFront: true,
+      translatedName =''
     };
   },
   props: {
@@ -53,7 +54,8 @@ export default {
   methods: {
     getTranslation: function (e) {
       e.preventDefault();
-      getNameTranslation(this.name, this.langCode);
+      const dataFromApi = getNameTranslation(this.name, this.langCode);
+      console.log(dataFromApi)
       e.target.reset();
       this.showFront = false;
     },
