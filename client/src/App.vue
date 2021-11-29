@@ -17,8 +17,8 @@ export default {
   data() {
     return {
       languages: [
-        { name: 'Chinese', code: 'cn' },
-        { name: 'Japanese', code: 'jn' },
+        { name: 'Chinese', code: 'zh' },
+        { name: 'Japanese', code: 'ja' },
         { name: 'Korean', code: 'ko' },
         { name: 'Russian', code: 'ru' },
         { name: 'Georgian', code: 'ka' },

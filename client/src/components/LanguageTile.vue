@@ -25,7 +25,7 @@
         <div>
           <img v-bind:src="require(`../assets/photos/${langName}.jpg`)" />
         </div>
-        <h2>Your name in {{ langName }} is ....</h2>
+        <h2>Your name in {{ langName }} is {{ this.translatedName }}</h2>
         <button @click="returnToFront">Try another name!</button>
       </div>
     </div>
@@ -56,7 +56,12 @@ export default {
       e.preventDefault();
       e.target.reset();
       const dataFromApi = await getNameTranslation(this.name, this.langCode);
-      console.log('data from api', dataFromApi);
+      console.log(
+        'data from api',
+        dataFromApi.data.translations[0].translatedText,
+      );
+      const newName = dataFromApi.data.translations[0].translatedText;
+      this.translatedName = newName;
       this.showFront = false;
     },
     returnToFront: function () {
