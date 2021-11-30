@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       showFront: true,
+      name: '',
       originalName: '',
       translatedName: '',
     };

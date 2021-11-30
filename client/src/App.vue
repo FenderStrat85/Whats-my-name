@@ -1,5 +1,6 @@
 <template>
   <div class="tile-container">
+    <h1>Find your name in another language!</h1>
     <div v-for="language in languages" :key="language">
       <LanguageTile :langName="language.name" :langCode="language.code" />
     </div>
