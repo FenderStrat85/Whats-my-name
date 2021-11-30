@@ -12,6 +12,7 @@
               type="text"
               v-model="name"
               placeholder="Enter your name here!"
+              required
             />
             <input type="submit" value="Translate" />
           </form>
