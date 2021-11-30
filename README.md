@@ -28,6 +28,4 @@ npm install npm@latest -g
 
 3. Create .env file using the template in the repo
 
-4. ```
-npm run serve
-```
+4. `npm run serve`
