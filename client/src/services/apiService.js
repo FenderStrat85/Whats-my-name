@@ -1,8 +1,6 @@
 const apiService = {};
 
 apiService.getNameTranslation = (name, code) => {
-  console.log(name);
-  console.log(code);
   return fetch(
     `https://translation.googleapis.com/language/translate/v2?key=${process.env.VUE_APP_GOOGLE_API_KEY}`,
     {

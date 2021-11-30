@@ -13,6 +13,7 @@ describe('LanguageTile Component', () => {
     const title = wrapper.get('[data-test="language-tile-title"]');
     expect(title.text()).toBe('Chinese');
   });
+
   it('Should allow a name to be entered', async () => {
     const wrapper = mount(LanguageTile, {
       props: { langName, langCode },
@@ -21,6 +22,7 @@ describe('LanguageTile Component', () => {
     await nameInput.setValue('John');
     expect(nameInput.element.value).toBe('John');
   });
+
   it('Form should not be submitted if nothing is entered', async () => {
     const spyApiCall = jest.spyOn(apiService, 'getNameTranslation');
     const wrapper = mount(LanguageTile, {
@@ -30,6 +32,7 @@ describe('LanguageTile Component', () => {
     await submitButton.trigger('click');
     expect(spyApiCall).toHaveBeenCalledTimes(0);
   });
+
   test('Submission of form should trigger api call with the appropriate credentials', async () => {
     const spyApiCall = jest.spyOn(apiService, 'getNameTranslation');
     const wrapper = mount(LanguageTile, {
@@ -38,9 +41,23 @@ describe('LanguageTile Component', () => {
     const nameInput = wrapper.get('[data-test="name-input"]');
     await nameInput.setValue('John');
     expect(nameInput.element.value).toBe('John');
-
     wrapper.get('[data-test="form"]').trigger('submit');
     expect(spyApiCall).toBeCalledTimes(1);
     expect(spyApiCall).toBeCalledWith('John', 'zh');
+  });
+
+  test('Back of tile renders correctly', async () => {
+    const wrapper = mount(LanguageTile, {
+      props: { langName, langCode },
+    });
+
+    await wrapper.setData({
+      showFront: false,
+      name: '',
+      originalName: 'Richard',
+      translatedName: '理查德',
+    });
+    const meta = wrapper.get('[data-test="tile-back-meta"]');
+    expect(meta.text()).toBe('Richard in Chinese is 理查德');
   });
 });

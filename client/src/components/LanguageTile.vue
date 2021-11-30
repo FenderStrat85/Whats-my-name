@@ -26,7 +26,7 @@
         <div>
           <img v-bind:src="require(`../assets/photos/${langName}.jpg`)" />
         </div>
-        <h2>
+        <h2 data-test="tile-back-meta">
           {{ this.originalName }} in {{ langName }} is
           {{ this.translatedName }}
         </h2>
@@ -59,9 +59,6 @@ export default {
   },
   methods: {
     getTranslation: async function () {
-      console.log('i got clicked');
-      // e.preventDefault();
-      // e.target.reset();
       this.originalName = this.name;
       try {
         const dataFromApi = await apiService.getNameTranslation(
