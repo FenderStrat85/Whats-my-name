@@ -30,7 +30,9 @@
           {{ this.originalName }} in {{ langName }} is
           {{ this.translatedName }}
         </h2>
-        <button @click="returnToFront">Try another name!</button>
+        <button @click="returnToFront()" data-test="return-to-front">
+          Try another name!
+        </button>
       </div>
     </div>
   </transition>

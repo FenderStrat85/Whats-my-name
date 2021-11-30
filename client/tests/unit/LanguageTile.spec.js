@@ -60,4 +60,21 @@ describe('LanguageTile Component', () => {
     const meta = wrapper.get('[data-test="tile-back-meta"]');
     expect(meta.text()).toBe('Richard in Chinese is 理查德');
   });
+
+  test('When back of the tile is showing, the button click should return to the front by updating the state', async () => {
+    const wrapper = mount(LanguageTile, {
+      props: { langName, langCode },
+    });
+
+    await wrapper.setData({
+      showFront: false,
+      name: '',
+      originalName: 'Richard',
+      translatedName: '理查德',
+    });
+
+    const button = wrapper.get('[data-test="return-to-front"]');
+    button.trigger('click');
+    expect(wrapper.vm.showFront).toBe(true);
+  });
 });
