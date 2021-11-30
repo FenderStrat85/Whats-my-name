@@ -1,4 +1,6 @@
-const getNameTranslation = (name, code) => {
+const apiService = {};
+
+apiService.getNameTranslation = (name, code) => {
   console.log(name);
   console.log(code);
   return fetch(
@@ -16,4 +18,4 @@ const getNameTranslation = (name, code) => {
     .catch((err) => console.log('error', err));
 };
 
-module.exports = getNameTranslation;
+export default apiService;

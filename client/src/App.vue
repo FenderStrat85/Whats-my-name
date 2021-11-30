@@ -1,8 +1,10 @@
 <template>
-  <div class="tile-container">
+  <div>
     <h1>Find your name in another language!</h1>
-    <div v-for="language in languages" :key="language">
-      <LanguageTile :langName="language.name" :langCode="language.code" />
+    <div class="tile-container">
+      <div v-for="language in languages" :key="language">
+        <LanguageTile :langName="language.name" :langCode="language.code" />
+      </div>
     </div>
   </div>
 </template>

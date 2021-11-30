@@ -2,19 +2,20 @@
   <transition name="flip" mode="out-in">
     <div v-if="showFront">
       <div class="tile-front">
-        <h1>{{ langName }}</h1>
+        <h1 data-test="language-tile-title">{{ langName }}</h1>
         <div>
           <img v-bind:src="require(`../assets/flags/${langName}.svg`)" />
         </div>
         <div class="name-entry">
-          <form @submit="getTranslation" class="form">
+          <form @submit.prevent="getTranslation" class="form" data-test="form">
             <input
+              data-test="name-input"
               type="text"
               v-model="name"
               placeholder="Enter your name here!"
               required
             />
-            <input type="submit" value="Translate" />
+            <button data-test="submit-button" type="submit">Translate!</button>
           </form>
         </div>
       </div>
@@ -36,7 +37,7 @@
 </template>
 
 <script>
-import getNameTranslation from '../services/apiService';
+import apiService from '../services/apiService';
 export default {
   name: 'LanguageTile',
   //upon creation of the component do something.
@@ -57,18 +58,22 @@ export default {
     langCode: String,
   },
   methods: {
-    getTranslation: async function (e) {
-      e.preventDefault();
+    getTranslation: async function () {
+      console.log('i got clicked');
+      // e.preventDefault();
       // e.target.reset();
       this.originalName = this.name;
-      const dataFromApi = await getNameTranslation(this.name, this.langCode);
-      console.log(
-        'data from api',
-        dataFromApi.data.translations[0].translatedText,
-      );
-      const newName = dataFromApi.data.translations[0].translatedText;
-      this.translatedName = newName;
-      this.showFront = false;
+      try {
+        const dataFromApi = await apiService.getNameTranslation(
+          this.name,
+          this.langCode,
+        );
+        const newName = dataFromApi.data.translations[0].translatedText;
+        this.translatedName = newName;
+        this.showFront = false;
+      } catch (err) {
+        console.log('There was an error');
+      }
     },
     returnToFront: function () {
       this.name = '';
