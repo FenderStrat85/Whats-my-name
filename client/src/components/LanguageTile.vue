@@ -13,7 +13,6 @@
               type="text"
               v-model="name"
               placeholder="Enter your name here!"
-              required
             />
             <button data-test="submit-button" type="submit">Translate!</button>
           </form>
@@ -62,16 +61,20 @@ export default {
   methods: {
     getTranslation: async function () {
       this.originalName = this.name;
-      try {
-        const dataFromApi = await apiService.getNameTranslation(
-          this.name,
-          this.langCode,
-        );
-        const newName = dataFromApi.data.translations[0].translatedText;
-        this.translatedName = newName;
-        this.showFront = false;
-      } catch (err) {
-        console.log('There was an error');
+      if (this.originalName.length === 0) {
+        return;
+      } else {
+        try {
+          const dataFromApi = await apiService.getNameTranslation(
+            this.name,
+            this.langCode,
+          );
+          const newName = dataFromApi.data.translations[0].translatedText;
+          this.translatedName = newName;
+          this.showFront = false;
+        } catch (err) {
+          console.log('There was an error');
+        }
       }
     },
     returnToFront: function () {

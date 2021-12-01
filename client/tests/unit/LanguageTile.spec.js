@@ -6,18 +6,24 @@ describe('LanguageTile Component', () => {
   const langName = 'Chinese';
   const langCode = 'zh';
 
-  it('Tile renders correctly based on the props passed in', () => {
-    const wrapper = shallowMount(LanguageTile, {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallowMount(LanguageTile, {
       props: { langName, langCode },
     });
+  });
+
+  afterEach(() => {
+    wrapper = null;
+  });
+
+  it('Tile renders correctly based on the props passed in', () => {
     const title = wrapper.get('[data-test="language-tile-title"]');
     expect(title.text()).toBe('Chinese');
   });
 
   it('Should allow a name to be entered', async () => {
-    const wrapper = mount(LanguageTile, {
-      props: { langName, langCode },
-    });
     const nameInput = wrapper.get('[data-test="name-input"]');
     await nameInput.setValue('John');
     expect(nameInput.element.value).toBe('John');
@@ -25,19 +31,12 @@ describe('LanguageTile Component', () => {
 
   it('Form should not be submitted if nothing is entered', async () => {
     const spyApiCall = jest.spyOn(apiService, 'getNameTranslation');
-    const wrapper = mount(LanguageTile, {
-      props: { langName, langCode },
-    });
-    const submitButton = wrapper.get('[data-test="submit-button"]');
-    await submitButton.trigger('click');
+    wrapper.get('[data-test="form"]').trigger('submit');
     expect(spyApiCall).toHaveBeenCalledTimes(0);
   });
 
   test('Submission of form should trigger api call with the appropriate credentials', async () => {
     const spyApiCall = jest.spyOn(apiService, 'getNameTranslation');
-    const wrapper = mount(LanguageTile, {
-      props: { langName, langCode },
-    });
     const nameInput = wrapper.get('[data-test="name-input"]');
     await nameInput.setValue('John');
     expect(nameInput.element.value).toBe('John');
@@ -47,10 +46,6 @@ describe('LanguageTile Component', () => {
   });
 
   test('Back of tile renders correctly', async () => {
-    const wrapper = mount(LanguageTile, {
-      props: { langName, langCode },
-    });
-
     await wrapper.setData({
       showFront: false,
       name: '',
@@ -62,10 +57,6 @@ describe('LanguageTile Component', () => {
   });
 
   test('When back of the tile is showing, the button click should return to the front by updating the state', async () => {
-    const wrapper = mount(LanguageTile, {
-      props: { langName, langCode },
-    });
-
     await wrapper.setData({
       showFront: false,
       name: '',
