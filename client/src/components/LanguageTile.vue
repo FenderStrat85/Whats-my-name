@@ -1,37 +1,61 @@
 <template>
   <transition name="flip" mode="out-in">
     <div v-if="showFront">
-      <div class="tile-front">
+      <div
+        class="h-md bg-gray-300 m-2.5 flex flex-col justify-center rounded-lg"
+      >
         <h1 data-test="language-tile-title">{{ langName }}</h1>
-        <div>
+        <div class="flex justify-center m-1.5">
           <img v-bind:src="require(`../assets/flags/${langName}.svg`)" />
         </div>
-        <div class="name-entry">
-          <form @submit.prevent="getTranslation" class="form" data-test="form">
+        <div class="">
+          <form
+            @submit.prevent="getTranslation"
+            class="flex flex-col justify-center content-center"
+            data-test="form"
+          >
             <input
+              class="text-center m-2.5 p-2.5 rounded-lg"
               data-test="name-input"
               type="text"
               v-model="name"
               placeholder="Enter your name here!"
+              required
             />
-            <button data-test="submit-button" type="submit">Translate!</button>
+            <div class="mt-2">
+              <button
+                class="btn bg-red-500"
+                data-test="submit-button"
+                type="submit"
+              >
+                Translate!
+              </button>
+            </div>
           </form>
         </div>
       </div>
     </div>
     <div v-else>
-      <div class="tile-back">
+      <div
+        class="h-md bg-blue-400 m-2.5 flex flex-col justify-center rounded-lg"
+      >
         <h1>{{ langName }}</h1>
-        <div>
+        <div class="flex justify-center m-1.5">
           <img v-bind:src="require(`../assets/photos/${langName}.jpg`)" />
         </div>
         <h2 data-test="tile-back-meta">
           {{ this.originalName }} in {{ langName }} is
           {{ this.translatedName }}
         </h2>
-        <button @click="returnToFront()" data-test="return-to-front">
-          Try another name!
-        </button>
+        <div class="mt-2">
+          <button
+            @click="returnToFront()"
+            class="btn bg-yellow-300"
+            data-test="return-to-front"
+          >
+            Try again!
+          </button>
+        </div>
       </div>
     </div>
   </transition>
@@ -112,7 +136,7 @@ button {
   margin: 0 10px 40px 10px;
 }
 
-.tile-front {
+/* .tile-front {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -120,7 +144,7 @@ button {
   border: 1px solid black;
   margin: 10px;
   height: 55vh;
-}
+} */
 
 .form {
   display: flex;

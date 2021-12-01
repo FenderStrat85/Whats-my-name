@@ -1,3 +1,17 @@
 @tailwind base;
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mt-3;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+}
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply border-solid rounded-full py-2 px-3 uppercase text-xl font-bold cursor-pointer w-2/4;
+}

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Find your name in another language!</h1>
+    <h1 class="m-2.5">Find your name in another language!</h1>
     <div class="tile-container">
       <div v-for="language in languages" :key="language">
         <LanguageTile :langName="language.name" :langCode="language.code" />
@@ -39,7 +39,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .tile-container {
@@ -47,5 +47,7 @@ export default {
   grid-template-columns: repeat(3, 30%);
   justify-content: center;
   background-color: aqua;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 </style>
