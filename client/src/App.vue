@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1 class="m-2.5">Find your name in another language!</h1>
-    <div class="tile-container">
+  <div class="bg-background">
+    <h1 class="m-2.5 pt-4">Find your name in another language!</h1>
+    <div class="tile-container bg-background">
       <div v-for="language in languages" :key="language">
         <LanguageTile :langName="language.name" :langCode="language.code" />
       </div>
@@ -39,14 +39,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 20px;
+  margin-top: -10px;
 }
 
 .tile-container {
   display: grid;
   grid-template-columns: repeat(3, 30%);
   justify-content: center;
-  background-color: aqua;
   padding-top: 20px;
   padding-bottom: 20px;
 }

@@ -2,7 +2,7 @@
   <transition name="flip" mode="out-in">
     <div v-if="showFront">
       <div
-        class="h-md bg-gray-300 m-2.5 flex flex-col justify-center rounded-lg"
+        class="h-md bg-green-400 m-2.5 flex flex-col justify-center rounded-lg shadow-lg"
       >
         <h1 data-test="language-tile-title">{{ langName }}</h1>
         <div class="flex justify-center m-1.5">
@@ -24,7 +24,7 @@
             />
             <div class="mt-2">
               <button
-                class="btn bg-red-500"
+                class="btn bg-red-500 hover:bg-red-400"
                 data-test="submit-button"
                 type="submit"
               >
@@ -37,7 +37,7 @@
     </div>
     <div v-else>
       <div
-        class="h-md bg-blue-400 m-2.5 flex flex-col justify-center rounded-lg"
+        class="h-md bg-blue-400 m-2.5 flex flex-col justify-center rounded-lg shadow-lg"
       >
         <h1>{{ langName }}</h1>
         <div class="flex justify-center m-1.5">
@@ -50,7 +50,7 @@
         <div class="mt-2">
           <button
             @click="returnToFront()"
-            class="btn bg-yellow-300"
+            class="btn bg-yellow-300 hover:bg-yellow-200"
             data-test="return-to-front"
           >
             Try again!

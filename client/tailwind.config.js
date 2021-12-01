@@ -13,7 +13,13 @@ module.exports = {
       sm: '40vh',
       md: '55vh',
     },
-    extend: {},
+    extend: {
+      colors: {
+        background: '#F9F3DF',
+        tileFront: '#C37B89',
+        tileBack: '#D1E8E4',
+      },
+    },
   },
   variants: {
     extend: {},
